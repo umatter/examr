@@ -61,14 +61,14 @@ generate_exam <-
           exam_text <- paste0(yaml_header_exam, exam_text, collapse = "\n")
           exam_output_path <- paste0("exam_", title, ".rmd")
           cat(exam_text, file = exam_output_path)
-          rmarkdown::render(exam_output_path)
+          rmarkdown::render(exam_output_path, clean = TRUE)
 
 
           # solutions files
           solutions_text <- paste0(yaml_header_solutions, solutions_text, collapse = "\n")
           solutions_output_path <- paste0("solutions_exam_", title, ".rmd")
           cat(solutions_text, file = solutions_output_path)
-          rmarkdown::render(solutions_output_path)
+          rmarkdown::render(solutions_output_path, clean = TRUE)
 
 
      }
