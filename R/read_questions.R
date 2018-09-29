@@ -11,52 +11,52 @@
 ##' @author Ulrich Matter <umatter@protonmail.com>
 ##' @depends readxl, readr
 ##' @examples
-##' myfile <- "data/exam_questions.xlsx"
+##' myfile <- "inst/exdata/exam_questions.xlsx"
 ##' my_questions <- read_questions(my_file)
 ##' head(my_questions)
 ##' @export
-##' 
+##'
 
-read_questions <- 
+read_questions <-
      function(file, year=NULL, mock=FALSE, topic = NULL) {
           require(readxl)
           require(readr)
-          
+
           # read the file, if not excel-file, assume csv
           if (grepl("\\.xlsx", file)) {
                q <- read_xlsx(file)
-               
+
           } else {
                if (grepl("\\.xls", file)) {
                     q <- read_xls(file)
-               
+
                } else {
                          q <- read_csv(file)
                     }
           }
-          
+
           # select only mock or real exam questions
           if (mock==TRUE){
                q <- q[q$used_in=="mock" & !is.na(q$used_in), ]
-          } 
-          
+          }
+
           if (mock==FALSE) {
                q <- q[q$used_in!="mock", ]
           }
-          
+
           # select only from certain year
           q <- q[q$year==year,]
-          
-          # select certain topics 
+
+          # select certain topics
           if (!is.null(topic)) {
-               q <- q[q$topic %in% topic]
+               q <- q[q$topic %in% topic,]
           }
-          
-          
+
+
           # parse different question types
           # TRUE/FALSE questions
           tf_questions <- q[q$type=="tf", c("question", "solution", "year", "used_in")]
-          
+
           # Multiple choice (several correct)
           mc <- q[q$type=="mc", c("question", "choices", "solution", "year", "used_in")]
           choices <- strsplit(mc$choices, ";")
@@ -66,7 +66,7 @@ read_questions <-
           })
           mc_questions <- mc[, c("question", "year", "used_in")]
           mc_questions$choices_solutions <- choices_solutions
-          
+
           # Multiple choice, one correct
           one_correct <- q[q$type=="one_correct", c("question", "choices", "solution", "year", "used_in")]
           choices_oc <- strsplit(one_correct$choices, ";")
@@ -76,10 +76,10 @@ read_questions <-
           })
           one_correct_questions <- one_correct[, c("question", "year", "used_in")]
           one_correct_questions$choices_solutions <- choices_solutions_oc
-          
-          
+
+
           # combine all for further processing in other functions
           parsed_questions <- list(tf=tf_questions, mc=mc_questions, one_correct=one_correct_questions)
-          
+
           return(parsed_questions)
      }
