@@ -27,9 +27,9 @@ generate_solution_text <-
           tfs <- x$tf
           tfs$question_nr <- paste0(1:nrow(tfs), ".  ")
           tfs_header <- type_headers$tf
-          tfs$sol_color <- "\\textcolor{green}{"
-          tfs$sol_color[tfs$solution==F] <- "\\textcolor{red}{"
-          tfs$sol_color <- paste0(tfs$sol_color, tfs$solution, "}")
+          tfs$sol_color <- "\n\\textcolor{green}{"
+          tfs$sol_color[tfs$solution=="F"] <- "\n\\textcolor{red}{"
+          tfs$sol_color <- paste0(tfs$sol_color, tfs$solution, "}\n")
 
           # create text output
           tf_text <- paste(tfs$question_nr,
@@ -60,8 +60,8 @@ generate_solution_text <-
 
                # color correct solutions (latex)
                solutions <- as.logical(mcs[i,]$choices_solutions[[1]]$solutions)
-               responses_colored <- paste0("\\textcolor{red}{", responses, "}\n")
-               responses_colored[solutions] <- paste0("\\textcolor{green}{", responses[solutions], "}\n")
+               responses_colored <- paste0("\n\\textcolor{red}{", responses, "}\n")
+               responses_colored[solutions] <- paste0("\n\\textcolor{green}{", responses[solutions], "}\n")
 
                responses_text[[i]] <- paste0(responses_colored, collapse = "")
 
@@ -69,8 +69,8 @@ generate_solution_text <-
           responses_text <- unlist(responses_text)
 
           # put it together
-          mcs_text <- paste0(q_text, responses_text, collapse="" )
-          mcs_text <- paste0(mcs_header, mcs_text )
+          mcs_text <- paste0(q_text, "\n", responses_text, collapse="" )
+          mcs_text <- paste0(mcs_header, "\n", mcs_text )
 
 
           # process MC questions (only one correct)
@@ -94,8 +94,8 @@ generate_solution_text <-
 
                # color correct solutions (latex)
                solutions <- as.logical(mcs_oc[i,]$choices_solutions[[1]]$solutions)
-               responses_colored <- paste0("\\textcolor{red}{", responses, "}\n")
-               responses_colored[solutions] <- paste0("\\textcolor{green}{", responses[solutions], "}\n")
+               responses_colored <- paste0("\n\\textcolor{red}{", responses, "}\n")
+               responses_colored[solutions] <- paste0("\n\\textcolor{green}{", responses[solutions], "}\n")
 
                responses_text_oc[[i]] <- paste0(responses_colored, collapse = "")
 
@@ -103,8 +103,8 @@ generate_solution_text <-
           responses_text_oc <- unlist(responses_text_oc)
 
           # put it together
-          mcs_oc_text <- paste0(q_text_oc, responses_text_oc, collapse="" )
-          mcs_oc_text <- paste0(mcs_oc_header, mcs_oc_text )
+          mcs_oc_text <- paste0(q_text_oc, "\n", responses_text_oc, collapse="" )
+          mcs_oc_text <- paste0(mcs_oc_header, "\n", mcs_oc_text )
 
 
 

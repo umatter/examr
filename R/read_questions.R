@@ -15,12 +15,10 @@
 ##' my_questions <- read_questions(my_file)
 ##' head(my_questions)
 ##' @export
-##'
+##' @import readxl, readr
 
 read_questions <-
      function(file, year=NULL, mock=FALSE, topic = NULL) {
-          require(readxl)
-          require(readr)
 
           # read the file, if not excel-file, assume csv
           if (grepl("\\.xlsx", file)) {
