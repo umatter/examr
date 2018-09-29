@@ -41,11 +41,13 @@ read_questions <-
           }
 
           if (mock==FALSE) {
-               q <- q[q$used_in!="mock", ]
+               q <- q[q$used_in!="mock" | is.na(q$used_in), ]
           }
 
           # select only from certain year
-          q <- q[q$year==year,]
+          if (!is.null(year)){
+               q <- q[q$year==year,]
+          }
 
           # select certain topics
           if (!is.null(topic)) {
@@ -55,27 +57,43 @@ read_questions <-
 
           # parse different question types
           # TRUE/FALSE questions
-          tf_questions <- q[q$type=="tf", c("question", "solution", "year", "used_in")]
+          if (any(q$type=="tf")) {
+               tf_questions <- q[q$type=="tf", c("question", "solution", "year", "used_in")]
+          } else {
+                    tf_questions <- NULL
+               }
+
 
           # Multiple choice (several correct)
-          mc <- q[q$type=="mc", c("question", "choices", "solution", "year", "used_in")]
-          choices <- strsplit(mc$choices, ";")
-          solutions <- strsplit(mc$solution, ";")
-          choices_solutions  <- lapply(1:length(choices), FUN = function(i){
-               data.frame(choices=choices[[i]], solutions=solutions[[i]])
-          })
-          mc_questions <- mc[, c("question", "year", "used_in")]
-          mc_questions$choices_solutions <- choices_solutions
+          if (any(q$type=="mc")) {
+               mc <- q[q$type=="mc", c("question", "choices", "solution", "year", "used_in")]
+               choices <- strsplit(mc$choices, ";")
+               solutions <- strsplit(mc$solution, ";")
+               choices_solutions  <- lapply(1:length(choices), FUN = function(i){
+                    data.frame(choices=choices[[i]], solutions=solutions[[i]])
+               })
+               mc_questions <- mc[, c("question", "year", "used_in")]
+               mc_questions$choices_solutions <- choices_solutions
+
+          } else {
+               mc_questions <- NULL
+          }
 
           # Multiple choice, one correct
-          one_correct <- q[q$type=="one_correct", c("question", "choices", "solution", "year", "used_in")]
-          choices_oc <- strsplit(one_correct$choices, ";")
-          solutions_oc <- one_correct$solution
-          choices_solutions_oc  <- lapply(1:length(choices_oc), FUN = function(i){
-               data.frame(choices=choices_oc[[i]], solutions=solutions_oc[i]==choices_oc[[i]])
-          })
-          one_correct_questions <- one_correct[, c("question", "year", "used_in")]
-          one_correct_questions$choices_solutions <- choices_solutions_oc
+          if (any(q$type=="one_correct")) {
+               one_correct <- q[q$type=="one_correct", c("question", "choices", "solution", "year", "used_in")]
+               choices_oc <- strsplit(one_correct$choices, ";")
+               solutions_oc <- one_correct$solution
+               choices_solutions_oc  <- lapply(1:length(choices_oc), FUN = function(i){
+                    data.frame(choices=choices_oc[[i]], solutions=solutions_oc[i]==choices_oc[[i]])
+               })
+               one_correct_questions <- one_correct[, c("question", "year", "used_in")]
+               one_correct_questions$choices_solutions <- choices_solutions_oc
+
+          } else {
+               one_correct_questions <- NULL
+
+          }
 
 
           # combine all for further processing in other functions
