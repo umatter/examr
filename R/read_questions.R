@@ -22,11 +22,11 @@ read_questions <-
 
           # read the file, if not excel-file, assume csv
           if (grepl("\\.xlsx", file)) {
-               q <- read_xlsx(file)
+               q <- readxl::read_xlsx(file)
 
           } else {
                if (grepl("\\.xls", file)) {
-                    q <- read_xls(file)
+                    q <- readxl::read_xls(file)
 
                } else {
                          q <- read_csv(file)
