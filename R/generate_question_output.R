@@ -7,7 +7,6 @@
 ##' @return a list of character strings (with markdown syntax)
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
-##' @depends
 ##' @examples
 ##' myfile <- "data/exam_questions.xlsx"
 ##' my_questions <- read_questions(myfile)

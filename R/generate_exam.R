@@ -15,7 +15,6 @@
 ##' @return a list of pandoc objects (the function also generates output to disk, see output)
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
-##' @depends
 ##' @examples
 ##' myfile <- "inst/exdata/exam_questions.xlsx"
 ##' generate_exam(author="Ulrich Matter", title="Econ 101", output="pdf", file = myfile)

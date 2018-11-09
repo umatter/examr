@@ -7,6 +7,8 @@
 generate_answersheet(as_template=NULL, title, date=Sys.Date())
 }
 \arguments{
+\item{as_template}{character string, path/filename of the excel workbook to be used as temlate (defaults to the one delivered in the package)}
+
 \item{title}{character string, the title of the course/exam}
 
 \item{date}{character string, the date of the exam (by default the system date)}

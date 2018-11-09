@@ -9,13 +9,12 @@
 ##' @return a list
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
-##' @depends readxl, readr
 ##' @examples
 ##' myfile <- "inst/exdata/exam_questions.xlsx"
 ##' my_questions <- read_questions(my_file)
 ##' head(my_questions)
 ##' @export
-##' @import readxl, readr
+##' @import readxl readr
 
 read_questions <-
      function(file, year=NULL, mock=FALSE, topic = NULL) {
