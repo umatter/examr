@@ -18,7 +18,7 @@ generate_answersheet <-
      function(as_template=NULL, title, date=Sys.Date()) {
 
           if (is.null(as_template)){
-               fpath <- system.file("extdata", "default_answersheet.xlsx", package="examr")
+               fpath <- system.file("exdata/default_answersheet.xlsx", package="examr")
           } else {
                fpath <- as_template
           }
