@@ -63,6 +63,8 @@ generate_exam <-
           cat(exam_text, file = exam_output_path)
           rmarkdown::render(exam_output_path, clean = TRUE)
 
+          # answer sheet
+          generate_answersheet(title = title, date = date)
 
           # solutions files
           solutions_text <- paste0(yaml_header_solutions, solutions_text, collapse = "\n")
