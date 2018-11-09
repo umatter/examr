@@ -27,9 +27,9 @@ generate_answersheet <-
           as <- XLConnect::loadWorkbook(fpath)
           # add exam info (note: the named region is predefined in the default_answersheet)
           # add the course name
-          writeNamedRegion(object = as, data = title, name = "course_name")
+          writeNamedRegion(object = as, data = data.frame(title), name = "course_name", header = FALSE, rownames = FALSE)
           # add the date of the exam
-          writeNamedRegion(object = as, data = date, name = "exam_date")
+          writeNamedRegion(object = as, data = data.frame(date), name = "exam_date", header = FALSE, rownames = FALSE)
 
           # write workbook to file
           as_output_path <- paste0("exam_answersheet_", title, ".xlsx")
