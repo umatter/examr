@@ -25,7 +25,7 @@ Reads an excel sheet with exam question of different types (T/F, MC, etc.)
 The...
 }
 \examples{
-myfile <- "data/exam_questions.xlsx"
+myfile <- "inst/exdata/exam_questions.xlsx"
 my_questions <- read_questions(my_file)
 head(my_questions)
 }

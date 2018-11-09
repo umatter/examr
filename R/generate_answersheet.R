@@ -1,8 +1,8 @@
 ##' Generate Answer Sheet
 ##'
 ##' Based on a template, generates an excel workbooks as answer sheet for FormScanner
-##' @usage generate_answersheet(template=NULL, title, date=Sys.Date())
-##' @template character string, path/filename of the excel workbook to be used as temlate (defaults to the one delivered in the package)
+##' @usage generate_answersheet(as_template=NULL, title, date=Sys.Date())
+##' @as_template character string, path/filename of the excel workbook to be used as temlate (defaults to the one delivered in the package)
 ##' @param title character string, the title of the course/exam
 ##' @param date character string, the date of the exam (by default the system date)
 ##' @return the path/filename of the generated answer sheet
@@ -16,12 +16,12 @@
 
 
 generate_answersheet <-
-     function(template=NULL, title, date=Sys.Date()) {
+     function(as_template=NULL, title, date=Sys.Date()) {
 
-          if (is.null(template)){
+          if (is.null(as_template)){
                fpath <- system.file("extdata", "default_answersheet.xlsx", package="examr")
           } else {
-               fpath <- template
+               fpath <- as_template
           }
 
           # load the template answersheet
