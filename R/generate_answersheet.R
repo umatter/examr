@@ -29,7 +29,7 @@ generate_answersheet <-
           # add the course name
           writeNamedRegion(object = as, data = data.frame(title), name = "course_name", header = FALSE, rownames = FALSE)
           # add the date of the exam
-          writeNamedRegion(object = as, data = data.frame(date), name = "exam_date", header = FALSE, rownames = FALSE)
+          writeNamedRegion(object = as, data = data.frame(as.character(date)), name = "exam_date", header = FALSE, rownames = FALSE)
 
           # write workbook to file
           as_output_path <- paste0("exam_answersheet_", title, ".xlsx")
