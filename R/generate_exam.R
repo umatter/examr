@@ -53,7 +53,9 @@ generate_exam <-
 
           # generate the exam and solutions
           exam_text <- generate_question_text(exam_selection)
-          solutions_text <- generate_solution_text(exam_selection)
+          solutions <- generate_solution_text(exam_selection)
+          solutions_text <- solutions[[1]] # text to use in pdf
+          solutions_coded <- solutions[[2]] # coded solutions to use in autocorreciton of scan results
 
           # generate files
           # exam files
@@ -66,10 +68,14 @@ generate_exam <-
           generate_answersheet(title = title, date = date)
 
           # solutions files
+          # for print
           solutions_text <- paste0(yaml_header_solutions, solutions_text, collapse = "\n")
           solutions_output_path <- paste0("solutions_exam_", title, ".rmd")
           cat(solutions_text, file = solutions_output_path)
           rmarkdown::render(solutions_output_path, clean = TRUE)
+          # for auto correction
+          solutions_coded_path <- paste0("solutions_coded_exam_", title, ".csv")
+          write.csv(solutions_coded, solutions_coded_path)
 
 
      }
