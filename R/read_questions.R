@@ -79,8 +79,8 @@ read_questions <-
           # Multiple choice, one correct
           if (any(q$type=="one_correct")) {
                one_correct <- q[q$type=="one_correct", c("question", "choices", "solution", "year", "used_in")]
-               choices_oc <- strsplit(one_correct$choices, ";")
-               solutions_oc <- one_correct$solution
+               choices_oc <- trimws(strsplit(one_correct$choices, ";"))
+               solutions_oc <- trimws(one_correct$solution)
                choices_solutions_oc  <- lapply(1:length(choices_oc), FUN = function(i){
                     data.frame(choices=choices_oc[[i]], solutions=solutions_oc[i]==choices_oc[[i]])
                })
