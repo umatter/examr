@@ -55,8 +55,10 @@ generate_question_text <-
                       collapse = "")
           }
           responses_text <- unlist(responses_text)
+          responses_text
           # put it together
-          mcs_text <- paste0(mcs_header, "\n", q_text, responses_text )
+          mcs_text <- paste0(q_text, responses_text, collapse = "\n")
+          mcs_text <- paste0(mcs_header, "\n", mcs_text)
 
 
           # process MC questions (only one correct)
@@ -81,8 +83,9 @@ generate_question_text <-
           }
           responses_text_oc <- unlist(responses_text_oc)
           # put it together
-          mcs_oc_text <- paste0(mcs_oc_header, "\n", q_text_oc, responses_text_oc )
-
+          # put it together
+          mcs_oc_text <- paste0(q_text_oc, responses_text_oc, collapse = "\n")
+          mcs_oc_text <- paste0(mcs_oc_header, "\n", mcs_oc_text)
 
           # Put all questions in one text
           all_text <- paste0(tf_text, "\n",
