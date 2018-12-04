@@ -24,19 +24,19 @@ generate_question_text <-
           # process TRUE/FALSE questions
           # select input
           tfs <- x$tf
-          tfs$question_nr <- paste0(1:nrow(tfs), ".  ")
+          tfs$question_nr <- paste0("### ", 1:nrow(tfs), ".  ")
           tfs_header <- type_headers$tf
 
           # create text output
           tf_text <- paste0(tfs$question_nr,
-                            tfs$question, collapse = "\n")
+                            tfs$question, collapse = "\n\n ---------------- \n\n")
 
           tf_text <- paste0(tfs_header, "\n",
                             tf_text, "\n")
 
           # process MC questions
           mcs <- x$mc
-          mcs$question_nr <- paste0(1:nrow(mcs), ".  ")
+          mcs$question_nr <- paste0("### ", 1:nrow(mcs), ".  ")
           mcs_header <- type_headers$mc
 
           # create text output
@@ -55,15 +55,14 @@ generate_question_text <-
                       collapse = "")
           }
           responses_text <- unlist(responses_text)
-          responses_text
           # put it together
-          mcs_text <- paste0(q_text, responses_text, collapse = "\n")
+          mcs_text <- paste0(q_text, responses_text, collapse = "\n\n ------------ \n\n")
           mcs_text <- paste0(mcs_header, "\n", mcs_text)
 
 
           # process MC questions (only one correct)
           mcs_oc <- x$one_correct
-          mcs_oc$question_nr <- paste0(1:nrow(mcs_oc), ".  ")
+          mcs_oc$question_nr <- paste0("### ", 1:nrow(mcs_oc), ".  ")
           mcs_oc_header <- type_headers$one_correct
 
           # create text output
@@ -84,12 +83,12 @@ generate_question_text <-
           responses_text_oc <- unlist(responses_text_oc)
           # put it together
           # put it together
-          mcs_oc_text <- paste0(q_text_oc, responses_text_oc, collapse = "\n")
+          mcs_oc_text <- paste0(q_text_oc, responses_text_oc, collapse = "\n\n --------- \n \n")
           mcs_oc_text <- paste0(mcs_oc_header, "\n", mcs_oc_text)
 
           # Put all questions in one text
-          all_text <- paste0(tf_text, "\n",
-                             mcs_text,"\n",
+          all_text <- paste0(tf_text, "\n\n --------- \n \n",
+                             mcs_text,"\n\n --------- \n \n",
                              mcs_oc_text)
 
 

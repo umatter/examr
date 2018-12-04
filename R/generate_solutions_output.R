@@ -26,7 +26,7 @@ generate_solution_text <-
           # process TRUE/FALSE questions
           # select input
           tfs <- x$tf
-          tfs$question_nr <- paste0(1:nrow(tfs), ".  ")
+          tfs$question_nr <- paste0("### ", 1:nrow(tfs), ".  ")
           tfs_header <- type_headers$tf
           tfs$sol_color <- "\n\\textcolor{green}{"
           tfs$sol_color[tfs$solution=="F"] <- "\n\\textcolor{red}{"
@@ -36,7 +36,7 @@ generate_solution_text <-
           tf_text <- paste(tfs$question_nr,
                             tfs$question, "\n", sep = " ")
 
-          tf_text <- paste(tf_text, tfs$sol_color, collapse = "\n")
+          tf_text <- paste(tf_text, tfs$sol_color, collapse = "\n\n ---------------- \n\n")
 
           tf_text <- paste0(tfs_header, "\n",
                             tf_text, "\n")
@@ -48,13 +48,13 @@ generate_solution_text <-
 
           # process MC questions
           mcs <- x$mc
-          mcs$question_nr <- paste0(1:nrow(mcs), ".  ")
+          mcs$question_nr <- paste0("### ", 1:nrow(mcs), ".  ")
           mcs_header <- type_headers$mc
 
           # generate text output
           # questions
           q_text<- paste0(mcs$question_nr,
-                          mcs$question, "\n")
+                          mcs$question, "\n\n")
           # responses per question
           responses_text <- list()
           responses_letters <- list()
@@ -77,7 +77,7 @@ generate_solution_text <-
           responses_text <- unlist(responses_text)
 
           # put it together
-          mcs_text <- paste0(q_text, "\n", responses_text, collapse="" )
+          mcs_text <- paste0(q_text, "\n", responses_text, collapse="\n\n ------------ \n\n")
           mcs_text <- paste0(mcs_header, "\n", mcs_text )
 
           # mcs: generate serialized solutions for automated correction of scan results
@@ -87,13 +87,13 @@ generate_solution_text <-
 
           # process MC questions (only one correct)
           mcs_oc <- x$one_correct
-          mcs_oc$question_nr <- paste0(1:nrow(mcs_oc), ".  ")
+          mcs_oc$question_nr <- paste0("### ", 1:nrow(mcs_oc), ".  ")
           mcs_oc_header <- type_headers$one_correct
 
           # create text output
           # questions
           q_text_oc<- paste0(mcs_oc$question_nr,
-                             mcs_oc$question, "\n")
+                             mcs_oc$question, "\n\n")
 
           # responses per question
           responses_text_oc <- list()
@@ -118,7 +118,7 @@ generate_solution_text <-
           responses_text_oc <- unlist(responses_text_oc)
 
           # put it together
-          mcs_oc_text <- paste0(q_text_oc, "\n", responses_text_oc, collapse="" )
+          mcs_oc_text <- paste0(q_text_oc, "\n", responses_text_oc, collapse = "\n\n --------- \n \n")
           mcs_oc_text <- paste0(mcs_oc_header, "\n", mcs_oc_text )
 
           # mcs, one correct: generate serialized solutions for automated correction of scan results
@@ -130,8 +130,8 @@ generate_solution_text <-
 
 
           # Put all questions in one text
-          all_text <- paste0(tf_text, "\n",
-                             mcs_text,"\n",
+          all_text <- paste0(tf_text, "\n\n --------- \n \n",
+                             mcs_text,"\n\n --------- \n \n",
                              mcs_oc_text)
           all_solutions <- c(tf_solutions, mcs_solutions, mcs_oc_solutions)
 

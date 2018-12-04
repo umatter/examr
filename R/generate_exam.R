@@ -35,12 +35,17 @@ generate_exam <-
           .title <- paste0("title: ", title, "\n")
           .title_solutions <- paste0("title: ", title, " --SOLUTIONS--\n")
           .date <- paste0("date: ", as.character(date), "\n")
+          .theme <- "theme: cerulean \n"
+          .highlight <- "highlight: tango \n"
           if (output=="pdf"){
                .output <- "output: pdf_document \n"
-               .latex_header <- "header-includes: \n   \\usepackage{xcolor} \n"
+               filterfile <- system.file("exdata/math.py", package="examr")
+               .pandoc_args <- paste0("pandoc_args: \n - --filter \n - ", filterfile, " \n")
+
+               .latex_header <- "header-includes: \n   \\usepackage{xcolor} \n \\usepackage[T1]{fontenc} \n"
           }
           yaml_header_exam <- paste0("---\n",
-                                .title, .author, .date, .output, .latex_header,
+                                .title, .author, .date, .output, .theme, .highlight, .pandoc_args, .latex_header,
                                 "---\n\n")
           yaml_header_solutions <- paste0("---\n",
                                      .title_solutions, .author, .date, .output, .latex_header,
