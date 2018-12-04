@@ -57,8 +57,8 @@ generate_exam <-
           exam_selection <- select_questions(exercises, types)
 
           # generate the exam and solutions
-          exam_text <- generate_question_text(exam_selection)
-          solutions <- generate_solution_text(exam_selection)
+          exam_text <- generate_question_text(exam_selection, type_headers = type_headers)
+          solutions <- generate_solution_text(exam_selection, type_headers = type_headers)
           solutions_text <- solutions[[1]] # text to use in pdf
           solutions_coded <- solutions[[2]] # coded solutions to use in autocorreciton of scan results
 

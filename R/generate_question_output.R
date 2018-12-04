@@ -8,7 +8,7 @@
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
 ##' @examples
-##' myfile <- "data/exam_questions.xlsx"
+##' myfile <- "inst/exdata/exam_questions.xlsx"
 ##' my_questions <- read_questions(myfile)
 ##' selection <-select_questions(my_questions)
 ##' generate_question_text(selection)
