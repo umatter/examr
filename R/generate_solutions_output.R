@@ -28,9 +28,9 @@ generate_solution_text <-
           tfs <- x$tf
           tfs$question_nr <- paste0("### ", 1:nrow(tfs), ".  ")
           tfs_header <- type_headers$tf
-          tfs$sol_color <- "\n\\textcolor{green}{"
-          tfs$sol_color[tfs$solution=="F"] <- "\n\\textcolor{red}{"
-          tfs$sol_color <- paste0(tfs$sol_color, tfs$solution, "}\n")
+          tfs$sol_color <- "\n<font color="green">\n\n"
+          tfs$sol_color[tfs$solution=="F"] <- "\n<font color="red">\n\n"
+          tfs$sol_color <- paste0(tfs$sol_color, tfs$solution, "</font>\n")
 
           # generate text output
           tf_text <- paste(tfs$question_nr,
@@ -67,8 +67,8 @@ generate_solution_text <-
 
                # color correct solutions (latex)
                solutions <- as.logical(mcs[i,]$choices_solutions[[1]]$solutions)
-               responses_colored <- paste0("\n\\textcolor{red}{", responses, "}\n")
-               responses_colored[solutions] <- paste0("\n\\textcolor{green}{", responses[solutions], "}\n")
+               responses_colored <- paste0("\n<font color="red">\n\n", responses, "</font>\n")
+               responses_colored[solutions] <- paste0("\n<font color="green">\n\n", responses[solutions], "</font>\n")
 
                responses_text[[i]] <- paste0(responses_colored, collapse = "")
                responses_letters[[i]] <- paste(response_letters[solutions], collapse = "|") # FormScan deliminates multiple choice responses with the pipe character!
@@ -108,8 +108,8 @@ generate_solution_text <-
 
                # color correct solutions (latex)
                solutions <- as.logical(mcs_oc[i,]$choices_solutions[[1]]$solutions)
-               responses_colored <- paste0("\n\\textcolor{red}{", responses, "}\n")
-               responses_colored[solutions] <- paste0("\n\\textcolor{green}{", responses[solutions], "}\n")
+               responses_colored <- paste0("\n<font color="red">\n\n", responses, "</font>\n")
+               responses_colored[solutions] <- paste0("\n<font color="green">\n\n", responses[solutions], "</font>\n")
 
                responses_text_oc[[i]] <- paste0(responses_colored, collapse = "")
                response_letters_oc[[i]] <- response_letter[solutions]
