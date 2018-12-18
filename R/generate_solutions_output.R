@@ -30,7 +30,7 @@ generate_solution_text <-
           tfs_header <- type_headers$tf
           tfs$sol_color <- "\n\\textcolor{green}{"
           tfs$sol_color[tfs$solution=="F"] <- "\n\\textcolor{red}{"
-          tfs$sol_color <- paste0(tfs$sol_color, tfs$solution, "}\n")
+          tfs$sol_color <- paste0(tfs$sol_color, tfs$solution, "}")
 
           # generate text output
           tf_text <- paste(tfs$question_nr,
