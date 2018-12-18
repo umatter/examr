@@ -62,15 +62,16 @@ generate_solution_text <-
 
                # extract response text, add letters
                response_letters <- toupper(letters[1:length(mcs[i,]$choices_solutions[[1]]$choices)])
-               responses <- paste0(response_letters,") ",
-                                   trimws(as.character(mcs[i,]$choices_solutions[[1]]$choices)))
-
                # color correct solutions (latex)
                solutions <- as.logical(mcs[i,]$choices_solutions[[1]]$solutions)
-               responses_colored <- paste0("\n\\textcolor{red}{", responses, "}\n")
-               responses_colored[solutions] <- paste0("\n\\textcolor{green}{", responses[solutions], "}\n")
+               response_letters_colored <- paste0("\n\\textcolor{red}{", response_letters, ")}")
+               response_letters_colored[solutions] <- paste0("\n\\textcolor{green}{", response_letters[solutions], ")}")
 
-               responses_text[[i]] <- paste0(responses_colored, collapse = "")
+               # put all together
+               responses <- paste0(response_letters_colored,
+                                   trimws(as.character(mcs[i,]$choices_solutions[[1]]$choices)))
+               responses_text[[i]] <- paste0(responses, collapse = "")
+               # solutions for correction output
                responses_letters[[i]] <- paste(response_letters[solutions], collapse = "|") # FormScan deliminates multiple choice responses with the pipe character!
 
           }
@@ -102,16 +103,15 @@ generate_solution_text <-
 
                # extract response text, add letters
                response_letter <- toupper(letters[1:length(mcs_oc[i,]$choices_solutions[[1]]$choices)])
-               responses <- paste0(response_letter,
-                                   ") ",
-                                   trimws(as.character(mcs_oc[i,]$choices_solutions[[1]]$choices)))
-
                # color correct solutions (latex)
                solutions <- as.logical(mcs_oc[i,]$choices_solutions[[1]]$solutions)
-               responses_colored <- paste0("\n\\textcolor{red}{", responses, "}\n")
-               responses_colored[solutions] <- paste0("\n\\textcolor{green}{", responses[solutions], "}\n")
-
+               response_letter_colored <- paste0("\n\\textcolor{red}{", response_letter, ")}")
+               responses_letter_colored[solutions] <- paste0("\n\\textcolor{green}{", response_letter[solutions], ")}")
+               responses <- paste0(response_letter_colored,
+                                   trimws(as.character(mcs_oc[i,]$choices_solutions[[1]]$choices)))
+               # put it all together
                responses_text_oc[[i]] <- paste0(responses_colored, collapse = "")
+               # for output correction
                response_letters_oc[[i]] <- response_letter[solutions]
 
           }
