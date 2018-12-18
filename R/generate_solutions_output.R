@@ -68,9 +68,9 @@ generate_solution_text <-
                response_letters_colored[solutions] <- paste0("\n\\textcolor{green}{", response_letters[solutions], ")}")
 
                # put all together
-               responses <- paste0(response_letters_colored,
+               responses_colored <- paste0(response_letters_colored,
                                    trimws(as.character(mcs[i,]$choices_solutions[[1]]$choices)))
-               responses_text[[i]] <- paste0(responses, collapse = "")
+               responses_text[[i]] <- paste0(responses_colored, collapse = "")
                # solutions for correction output
                responses_letters[[i]] <- paste(response_letters[solutions], collapse = "|") # FormScan deliminates multiple choice responses with the pipe character!
 
@@ -107,7 +107,7 @@ generate_solution_text <-
                solutions <- as.logical(mcs_oc[i,]$choices_solutions[[1]]$solutions)
                response_letter_colored <- paste0("\n\\textcolor{red}{", response_letter, ")}")
                response_letter_colored[solutions] <- paste0("\n\\textcolor{green}{", response_letter[solutions], ")}")
-               responses <- paste0(response_letter_colored,
+               responses_colored <- paste0(response_letter_colored,
                                    trimws(as.character(mcs_oc[i,]$choices_solutions[[1]]$choices)))
                # put it all together
                responses_text_oc[[i]] <- paste0(responses_colored, collapse = "")
