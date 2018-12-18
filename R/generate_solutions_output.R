@@ -106,7 +106,7 @@ generate_solution_text <-
                # color correct solutions (latex)
                solutions <- as.logical(mcs_oc[i,]$choices_solutions[[1]]$solutions)
                response_letter_colored <- paste0("\n\\textcolor{red}{", response_letter, ")}")
-               responses_letter_colored[solutions] <- paste0("\n\\textcolor{green}{", response_letter[solutions], ")}")
+               response_letter_colored[solutions] <- paste0("\n\\textcolor{green}{", response_letter[solutions], ")}")
                responses <- paste0(response_letter_colored,
                                    trimws(as.character(mcs_oc[i,]$choices_solutions[[1]]$choices)))
                # put it all together
