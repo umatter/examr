@@ -11,7 +11,7 @@
 ##' @author Ulrich Matter <umatter@protonmail.com>
 ##' @examples
 ##' myfile <- "inst/exdata/exam_questions.xlsx"
-##' my_questions <- read_questions(my_file)
+##' my_questions <- read_questions(myfile)
 ##' head(my_questions)
 ##' @export
 ##' @import readxl readr
@@ -64,8 +64,8 @@ read_questions <-
           # Multiple choice (several correct)
           if (any(q$type=="mc")) {
                mc <- q[q$type=="mc", c("question", "choices", "solution", "year", "used_in")]
-               choices <- strsplit(mc$choices, ";")
-               solutions <- strsplit(mc$solution, ";")
+               choices <- lapply(strsplit(mc$choices, ";"), trimws)
+               solutions <- lapply(strsplit(mc$solution, ";"), trimws)
                choices_solutions  <- lapply(1:length(choices), FUN = function(i){
                     data.frame(choices=choices[[i]], solutions=solutions[[i]])
                })
