@@ -41,7 +41,7 @@ read_scan_results <-
           }
           groups_bound <- do.call("cbind", groups_list)
 
-          results_formatted <- cbind(data.frame(file_name=q$File.name), q$idnr_formatted, groups_bound )
+          results_formatted <- cbind(data.frame(file_name=q$File.name, id_nr=q$idnr_formatted), groups_bound )
 
           return(results_formatted)
      }

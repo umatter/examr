@@ -4,8 +4,7 @@
 ##' @usage correct_scan_results(file, solutions_file, id_nr="student_number", groups=c("group001", "group002", "group003"))
 ##' @param file character, the path/filename of the csv file containing the scan results
 ##' @param solutions_file character, the path/filename of the csv file containing the sample solutions
-##' @param id_nr character, group variable indicating the file-id (i.e., students number), defaults to "student_number"
-##' @param groups named list indicating the possible responses defaults to c("group001", "group002", "group003")
+##' @param points_file character, the path/filename of the csv file containing the points for correct responses per exam question
 ##' @return a data.frame
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
@@ -16,8 +15,43 @@
 ##'
 ##' @export
 
-read_scan_results <-
-     function(file, solutions_file, id_nr="student_number", groups=c("group001", "group002", "group003")){
+correct_scan_results <-
+     function(file, solutions_file){
 
+          # read solutions and official sample solutions
+          exam <-read_scan_results(file)
+          solutions <- read_scan_results(solutions_file)
+          points <- read_scan_results(points_file)
 
-     }
+          # select responses, correct responses
+          responses <- exam[,-1:-2] # first two columns are filename and student id
+
+          # generate solutions frame for correction
+          sol_frame <- solutions
+          names(sol_frame) <- names(solutions)
+          for (i in 2:nrow(responses)) {
+
+               sol_frame <- rbind(sol_frame, solutions)
+
+          }
+
+          # generate points frame for correction
+          points_frame <- points
+          names(points_frame) <- names(points)
+          for (i in 2:nrow(responses)) {
+
+               points_frame <- rbind(points_frame, points)
+
+          }
+
+          # correct exam
+          correction <- responses == sol_frame
+          # assign points
+          points_assigned <- as.data.frame(as.matrix(points_frame) * as.numeric(as.matrix(correction)))
+
+          # add ids
+          points_assigned <- cbind(exam[,1:2], points_assigned)
+
+          return(points_assigned)
+
+}
