@@ -4,7 +4,7 @@
 ##' @usage correct_scan_results(file, solutions_file, id_nr="student_number", groups=c("group001", "group002", "group003"))
 ##' @param file character, the path/filename of the csv file containing the scan results
 ##' @param solutions_file character, the path/filename of the csv file containing the sample solutions
-##' @param points_file character, the path/filename of the csv file containing the points for correct responses per exam question
+##' @param points named list, list with key-value pairs question_group-points (e.g., list(group001=1.5, group002=3, group003=2))
 ##' @return a data.frame
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
