@@ -38,7 +38,7 @@ grade_results_ch <-
           dec_up <- quantile(totals, probs=quant)
           quantile_up <- names(dec_up)
           minp_6 <- unname(dec_up)
-          p_4 <- round(minp_6/ratio64,1)
+          p_4 <- round_any(minp_6/ratio64,.5)
 
           # formula parameters
           a <- ((4*minp_6) - (6*p_4))/(minp_6 - p_4)
