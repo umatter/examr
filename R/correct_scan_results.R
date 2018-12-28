@@ -26,6 +26,14 @@ correct_scan_results <-
           # select responses, correct responses
           responses <- exam[,-1:-2] # first two columns are filename and student id
 
+          # generate solutions frame for correction
+          sol_frame <- solutions
+          for (i in 2:nrow(responses)) {
+
+               sol_frame <- rbind(sol_frame, solutions)
+
+          }
+
           # correct exam
           correction <- responses == solutions
           # assign points
