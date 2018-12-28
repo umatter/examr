@@ -134,6 +134,7 @@ generate_solution_text <-
                              mcs_text,"\n\n --------- \n \n",
                              mcs_oc_text)
           all_solutions <- c(tf_solutions, mcs_solutions, mcs_oc_solutions)
+          names(all_solutions) <- gsub("### ", "", names(all_solutions))
 
 
           return(list(all_text, all_solutions))

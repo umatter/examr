@@ -21,20 +21,11 @@ correct_scan_results <-
 
           # read solutions and official sample solutions
           exam <-read_scan_results(file)
-          solutions <- read_scan_results(solutions_file)
+          solutions <- read.csv(solutions_file)
           points <- read_scan_results(points_file)
 
           # select responses, correct responses
           responses <- exam[,-1:-2] # first two columns are filename and student id
-
-          # generate solutions frame for correction
-          sol_frame <- solutions
-          names(sol_frame) <- names(solutions)
-          for (i in 2:nrow(responses)) {
-
-               sol_frame <- rbind(sol_frame, solutions)
-
-          }
 
           # correct exam
           correction <- responses == sol_frame
