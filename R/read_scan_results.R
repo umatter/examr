@@ -13,6 +13,7 @@
 ##' my_results <- read_scan_results(myfile)
 ##' head(my_results)
 ##' @export
+##'
 
 read_scan_results <-
      function(file, id_nr="student_number", groups=c("group001", "group002", "group003")){

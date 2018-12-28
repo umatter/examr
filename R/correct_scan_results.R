@@ -14,6 +14,7 @@
 ##' my_results <- correct_scan_results(myfile, solutions)
 ##'
 ##' @export
+##'
 
 correct_scan_results <-
      function(file, solutions_file, points_file){
