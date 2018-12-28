@@ -26,7 +26,7 @@ The...
 }
 \examples{
 myfile <- "inst/exdata/exam_questions.xlsx"
-my_questions <- read_questions(my_file)
+my_questions <- read_questions(myfile)
 head(my_questions)
 }
 \author{
