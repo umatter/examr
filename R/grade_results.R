@@ -2,7 +2,7 @@
 ##'
 ##' Grades exam results based on total points and some fix parameters following the CH grade scale (1-6)
 ##' @usage grade_results_ch(exams_corrected)
-##' @param exams_corrected character, a data frame with the total points per student (output of correct_scan_results)
+##' @param exams_corrected a data frame (output of correct_scan_results) or numeric vector with the total points per student
 ##' @param c numeric, discount multiplier for grades under 4
 ##' @param quant numeric, quantile defining the threshold for the top grade (6)
 ##' @param ratio64 numeric, ratio of minimum no. of points for a 6 and minimum points for a 4
@@ -24,6 +24,8 @@
 grade_results_ch <-
      function(exams_corrected, c=0.18, quant=0.93, ratio64=2.68, round=.5 ) {
 
+          stopifnot(is.numeric(exams_corrected) | is.data.frame(exams_corrected))
+
           # internal functions
           grade_u4 <-
                function(p4, points, c) {
@@ -32,7 +34,11 @@ grade_results_ch <-
                }
 
           # select total points per student for further processing
-          totals <- exams_corrected$total_points # see correct_scan_results()
+          if (is.data.frame(exams_corrected)) {
+               totals <- exams_corrected$total_points # see correct_scan_results()
+          } else {
+               totals <- exams_corrected # num-vector
+          }
 
           # parameters for grading (critical quantiles)
           dec_up <- quantile(totals, probs=quant)
@@ -74,6 +80,9 @@ grade_results_ch <-
 
 
           }
+
+          # compute grade scale
+
 
 
           return(list(grades=grades,
