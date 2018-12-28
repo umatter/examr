@@ -35,7 +35,7 @@ correct_scan_results <-
           }
 
           # correct exam
-          correction <- responses == solutions
+          correction <- responses == sol_frame
           # assign points
           points_frame <- generate_points_frame(file, points)
           points_assigned <- as.data.frame(as.matrix(points_frame) * as.numeric(as.matrix(correction)))
