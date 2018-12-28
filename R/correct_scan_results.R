@@ -38,10 +38,13 @@ correct_scan_results <-
           correction <- responses == sol_frame
           # assign points
           points_frame <- generate_points_frame(file, points)
-          points_assigned <- as.data.frame(as.matrix(points_frame) * as.numeric(as.matrix(correction)))
+          points_assigned_m <- as.matrix(points_frame) * as.numeric(as.matrix(correction))
+          points_assigned <- as.data.frame(points_assigned_m)
+          points_assigned$total_points <- apply(points_assigned, 1, sum)
 
-          # add ids
+          # add ids, question numbers
           points_assigned <- cbind(exam[,1:2], points_assigned)
+          names(points_assigned) <- c(names(exam), "total_points")
 
           return(points_assigned)
 
