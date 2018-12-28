@@ -36,18 +36,10 @@ correct_scan_results <-
 
           }
 
-          # generate points frame for correction
-          points_frame <- points
-          names(points_frame) <- names(points)
-          for (i in 2:nrow(responses)) {
-
-               points_frame <- rbind(points_frame, points)
-
-          }
-
           # correct exam
           correction <- responses == sol_frame
           # assign points
+          points_frame <- generate_points_frame(file, points)
           points_assigned <- as.data.frame(as.matrix(points_frame) * as.numeric(as.matrix(correction)))
 
           # add ids

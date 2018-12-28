@@ -3,6 +3,7 @@
 export(correct_scan_results)
 export(generate_answersheet)
 export(generate_exam)
+export(generate_points_frame)
 export(generate_question_text)
 export(generate_solution_text)
 export(read_questions)

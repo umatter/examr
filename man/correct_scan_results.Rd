@@ -11,7 +11,7 @@ correct_scan_results(file, solutions_file, id_nr="student_number", groups=c("gro
 
 \item{solutions_file}{character, the path/filename of the csv file containing the sample solutions}
 
-\item{points_file}{character, the path/filename of the csv file containing the points for correct responses per exam question}
+\item{points}{named list, list with key-value pairs question_group-points (e.g., list(group001=1.5, group002=3, group003=2))}
 }
 \value{
 a data.frame
