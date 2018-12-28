@@ -7,3 +7,5 @@
 *.pdf
 .Rprofile
 *.xlsx
+inst/exdata/short_answersheet.xtmpl
+inst/exdata/short_answersheet2.xtmpl

@@ -10,7 +10,7 @@
 ##' @author Ulrich Matter <umatter@protonmail.com>
 ##' @examples
 ##' myfile <- system.file("inst/exdata/example_scan_results.csv", package="examr")
-##' my_results <- read_scan_results(my_file)
+##' my_results <- read_scan_results(myfile)
 ##' head(my_results)
 ##' @export
 

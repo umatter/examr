@@ -16,7 +16,7 @@
 ##' @export
 
 correct_scan_results <-
-     function(file, solutions_file){
+     function(file, solutions_file, points_file){
 
           # read solutions and official sample solutions
           exam <-read_scan_results(file)
