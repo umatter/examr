@@ -51,6 +51,9 @@ read_questions <-
                q <- q[q$topic %in% topic,]
           }
 
+          # remove nas
+          q <- a[!is.na(q$type),]
+
 
           # parse different question types
           # TRUE/FALSE questions

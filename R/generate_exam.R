@@ -80,7 +80,9 @@ generate_exam <-
           rmarkdown::render(solutions_output_path, clean = TRUE)
           # for auto correction
           solutions_coded_path <- paste0("solutions_coded_exam_", title, ".csv")
-          write.csv(as.data.frame(t(solutions_coded)), solutions_coded_path)
+          write.csv(as.data.frame(t(solutions_coded)),
+                    solutions_coded_path,
+                    row.names = FALSE)
 
 
      }
