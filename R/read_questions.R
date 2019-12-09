@@ -52,7 +52,7 @@ read_questions <-
           }
 
           # remove nas
-          q <- a[!is.na(q$type),]
+          q <- q[!is.na(q$type),]
 
 
           # parse different question types
