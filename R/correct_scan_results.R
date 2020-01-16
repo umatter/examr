@@ -22,7 +22,7 @@ correct_scan_results <-
 
           # read solutions and official sample solutions
           exam <-read_scan_results(file, ...)
-          solutions <- read.csv(solutions_file, stringsAsFactors = FALSE)
+          solutions <- read.csv(solutions_file, colClasses = "character")
 
           # select responses, correct responses
           responses <- exam[,-1:-2] # first two columns are filename and student id
