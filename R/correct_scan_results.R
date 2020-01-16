@@ -1,10 +1,11 @@
 ##' Correct Scan Results
 ##'
 ##' Reads the scan results of running FormScan on the answer sheets, and the sample solutions, corrects the exams
-##' @usage correct_scan_results(file, solutions_file, id_nr="student_number", groups=c("group001", "group002", "group003"))
+##' @usage correct_scan_results(file, solutions_file, id_nr="student_number", groups=c("group001", "group002", "group003"), ...)
 ##' @param file character, the path/filename of the csv file containing the scan results
 ##' @param solutions_file character, the path/filename of the csv file containing the sample solutions
 ##' @param points named list, list with key-value pairs question_group-points (e.g., list(group001=1.5, group002=3, group003=2))
+##' @param ... parameters passed down to lower level functions (e.g., id_nr="student_id_nr")
 ##' @return a data.frame
 ##' @details The...
 ##' @author Ulrich Matter <umatter@protonmail.com>
@@ -17,10 +18,10 @@
 ##'
 
 correct_scan_results <-
-     function(file, solutions_file, points){
+     function(file, solutions_file, points, ...){
 
           # read solutions and official sample solutions
-          exam <-read_scan_results(file)
+          exam <-read_scan_results(file, ...)
           solutions <- read.csv(solutions_file, stringsAsFactors = FALSE)
 
           # select responses, correct responses

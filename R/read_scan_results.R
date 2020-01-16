@@ -16,7 +16,7 @@
 ##' @importFrom data.table fread
 
 read_scan_results <-
-     function(file, id_nr="student_number", groups=c("group001", "group002", "group003")){
+     function(file, id_nr="student_id_nr", groups=c("group001", "group002", "group003")){
 
           # read the file
           q <- fread(file = file)
