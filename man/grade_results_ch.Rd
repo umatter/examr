@@ -4,7 +4,7 @@
 \alias{grade_results_ch}
 \title{Grade Exams (CH Scale)}
 \usage{
-grade_results_ch(exams_corrected)
+grade_results_ch(exams_corrected, c=0.18, quant=0.93, ratio64=2.68, round=.5, minp_6 = NULL )
 }
 \arguments{
 \item{exams_corrected}{a data frame (output of correct_scan_results) or numeric vector with the total points per student}
@@ -16,6 +16,8 @@ grade_results_ch(exams_corrected)
 \item{ratio64}{numeric, ratio of minimum no. of points for a 6 and minimum points for a 4}
 
 \item{round}{numeric, to what grade fractions should the grades be rounded (either .1, .5, or NULL, defaults to NULL). if NULL, grades won't be rounded}
+
+\item{minp_6}{numeric minimum number of points for best grade (6), defaults to NULL (minp_6 is determined based on quant)}
 }
 \value{
 a data.frame with the grade per student

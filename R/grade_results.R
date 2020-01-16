@@ -1,12 +1,13 @@
 ##' Grade Exams (CH Scale)
 ##'
 ##' Grades exam results based on total points and some fix parameters following the CH grade scale (1-6)
-##' @usage grade_results_ch(exams_corrected)
+##' @usage grade_results_ch(exams_corrected, c=0.18, quant=0.93, ratio64=2.68, round=.5, minp_6 = NULL )
 ##' @param exams_corrected a data frame (output of correct_scan_results) or numeric vector with the total points per student
 ##' @param c numeric, discount multiplier for grades under 4
 ##' @param quant numeric, quantile defining the threshold for the top grade (6)
 ##' @param ratio64 numeric, ratio of minimum no. of points for a 6 and minimum points for a 4
 ##' @param round numeric, to what grade fractions should the grades be rounded (either .1, .5, or NULL, defaults to NULL). if NULL, grades won't be rounded
+##' @param minp_6 numeric minimum number of points for best grade (6), defaults to NULL (minp_6 is determined based on quant)
 ##' @return a data.frame with the grade per student
 ##' @details grade= a + b*points, if fail : grade =  4 - c (points(4) - points)
 ##' @author Ulrich Matter <umatter@protonmail.com>
@@ -22,7 +23,7 @@
 
 
 grade_results_ch <-
-     function(exams_corrected, c=0.18, quant=0.93, ratio64=2.68, round=.5 ) {
+     function(exams_corrected, c=0.18, quant=0.93, ratio64=2.68, round=.5, minp_6 = NULL ) {
 
           stopifnot(is.numeric(exams_corrected) | is.data.frame(exams_corrected))
 
@@ -41,9 +42,12 @@ grade_results_ch <-
           }
 
           # parameters for grading (critical quantiles)
-          dec_up <- quantile(totals, probs=quant)
-          quantile_up <- names(dec_up)
-          minp_6 <- unname(dec_up)
+          if (is.null(minp_6)){
+               dec_up <- quantile(totals, probs=quant)
+               quantile_up <- names(dec_up)
+               minp_6 <- unname(dec_up)
+          }
+
           p_4 <- round_any(minp_6/ratio64,.5)
 
           # formula parameters

@@ -4,7 +4,7 @@
 \alias{correct_scan_results}
 \title{Correct Scan Results}
 \usage{
-correct_scan_results(file, solutions_file, id_nr="student_number", groups=c("group001", "group002", "group003"), ...)
+correct_scan_results(file, solutions_file, groups=c("group001", "group002", "group003"), ...)
 }
 \arguments{
 \item{file}{character, the path/filename of the csv file containing the scan results}
