@@ -7,7 +7,7 @@
 grade_results_ch(exams_corrected)
 }
 \arguments{
-\item{exams_corrected}{character, a data frame with the total points per student (output of correct_scan_results)}
+\item{exams_corrected}{a data frame (output of correct_scan_results) or numeric vector with the total points per student}
 
 \item{c}{numeric, discount multiplier for grades under 4}
 
