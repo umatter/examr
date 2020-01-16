@@ -20,6 +20,7 @@ read_scan_results <-
 
           # read the file
           q <- as.data.frame(fread(file = file))
+          names(q)[1] <- "File.name"
 
           # extract student's number (format follows CH/EU convention)
           idnr <- q[,grepl(id_nr, names(q), fixed = TRUE)]
