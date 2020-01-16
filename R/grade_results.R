@@ -90,7 +90,7 @@ grade_results_ch <-
 
 
           return(list(grades=grades,
-                      dec_up=dec_up,
+                      minp_6=minp_6,
                       top_points=(1-quant),
                       p_4=p_4,
                       ratio64=ratio64,
