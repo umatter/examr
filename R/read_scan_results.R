@@ -19,7 +19,7 @@ read_scan_results <-
      function(file, id_nr="student_id_nr", groups=c("group001", "group002", "group003")){
 
           # read the file
-          q <- fread(file = file)
+          q <- as.data.frame(fread(file = file))
 
           # extract student's number (format follows CH/EU convention)
           idnr <- q[,grepl(id_nr, names(q), fixed = TRUE)]
