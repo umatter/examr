@@ -13,13 +13,13 @@
 ##' my_results <- read_scan_results(myfile)
 ##' head(my_results)
 ##' @export
-##'
+##' @importFrom datatable fread
 
 read_scan_results <-
      function(file, id_nr="student_number", groups=c("group001", "group002", "group003")){
 
           # read the file
-          q <- read.csv(file = file, sep = ";")
+          q <- fread(file = file)
 
           # extract student's number (format follows CH/EU convention)
           idnr <- q[,grepl(id_nr, names(q), fixed = TRUE)]
