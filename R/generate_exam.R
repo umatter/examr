@@ -44,6 +44,13 @@ generate_exam <-
 
                .latex_header <- "header-includes: \n   \\usepackage{xcolor} \n \\usepackage[T1]{fontenc} \n"
           }
+          if (output=="docx"){
+               .output <- "output: word_document \n"
+               filterfile <- system.file("exdata/math.py", package="examr")
+               .pandoc_args <- paste0("pandoc_args: \n - --filter \n - ", filterfile, " \n")
+
+               .latex_header <- "header-includes: \n   \\usepackage{xcolor} \n \\usepackage[T1]{fontenc} \n"
+          }
           yaml_header_exam <- paste0("---\n",
                                 .title, .author, .date, .output, .theme, .highlight, .pandoc_args, .latex_header,
                                 "---\n\n")
